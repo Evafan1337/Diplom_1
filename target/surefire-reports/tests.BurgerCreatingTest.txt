@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: tests.BurgerCreatingTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.049 sec <<< FAILURE! - in tests.BurgerCreatingTest
+initializationError(tests.BurgerCreatingTest)  Time elapsed: 0.007 sec  <<< ERROR!
+java.lang.Exception: No public static parameters method on class tests.BurgerCreatingTest
+
