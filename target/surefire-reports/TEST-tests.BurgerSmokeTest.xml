@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tests.BurgerSmokeTest" time="0.086" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tests.BurgerSmokeTest" time="0.086" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.18+10-LTS"/>
@@ -31,7 +31,7 @@
     <property name="java.class.version" value="55.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="5.15.0-58-generic"/>
+    <property name="os.version" value="5.19.0-32-generic"/>
     <property name="library.jansi.path" value="/usr/share/maven/lib/jansi-native"/>
     <property name="user.home" value="/home/user1"/>
     <property name="user.timezone" value="Europe/Samara"/>
@@ -60,10 +60,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="moveIngredientCorrect" classname="tests.BurgerSmokeTest" time="0.003"/>
-  <testcase name="removeIngredientCorrect" classname="tests.BurgerSmokeTest" time="0"/>
+  <testcase name="removeIngredientCorrect" classname="tests.BurgerSmokeTest" time="0.005"/>
   <testcase name="setBunsCorrect" classname="tests.BurgerSmokeTest" time="0"/>
-  <testcase name="getReceiptCorrect" classname="tests.BurgerSmokeTest" time="0"/>
-  <testcase name="getPriceCorrect" classname="tests.BurgerSmokeTest" time="0"/>
   <testcase name="addIngredientCorrect" classname="tests.BurgerSmokeTest" time="0"/>
 </testsuite>

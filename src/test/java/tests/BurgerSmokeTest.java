@@ -16,33 +16,34 @@ public class BurgerSmokeTest {
     @Mock
     Bun bun;
 
-    Burger burger;
+    private Burger burger;
+
     @Before
-    public void setUp(){
+    public void setUp() {
         this.burger = new Burger();
     }
 
 
     @Test
-    public void setBunsCorrect(){
+    public void setBunsCorrect() {
         assert true == true;
     }
 
     @Test
-    public void addIngredientCorrect(){
+    public void addIngredientCorrect() {
         int expected = this.burger.ingredients.size() + 1;
         this.burger.addIngredient(ingredientMock);
         int result = this.burger.ingredients.size();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void removeIngredientCorrect(){
+    public void removeIngredientCorrect() {
         int expected = 0;
         this.burger.addIngredient(ingredientMock);
         this.burger.removeIngredient(0);
         int result = this.burger.ingredients.size();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
 }

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.Test;
+import org.mockito.Mock;
 import praktikum.*;
 
 import java.util.ArrayList;
@@ -15,11 +16,17 @@ public class BurgerTest {
 
     Burger burger;
     Database database = new Database();
+
     List<Bun> buns = database.availableBuns();
+
+    @Mock
+    Bun bunMock;
+
+
     List<Ingredient> ingredients = database.availableIngredients();
     List<Ingredient> ingredientsUsed = new ArrayList<>();
 
-    public float calculatePrice(){
+    public float calculatePrice() {
         float price = buns.get(0).getPrice() * 2;
 
         for (Ingredient ingredient : ingredientsUsed) {
@@ -29,7 +36,7 @@ public class BurgerTest {
         return price;
     }
 
-    public String createReceipt(){
+    public String createReceipt() {
         StringBuilder expected = new StringBuilder(String.format("(==== %s ====)%n", buns.get(0).getName()));
         for (Ingredient ingredient : ingredientsUsed) {
             expected.append(String.format("= %s %s =%n", ingredient.getType().toString().toLowerCase(),
@@ -50,7 +57,7 @@ public class BurgerTest {
     }
 
     @Before
-    public void setUp(){
+    public void setUp() {
 
         this.burger = new Burger();
 
@@ -68,34 +75,44 @@ public class BurgerTest {
     }
 
     @Test
-    public void checkGetReceiptCorrect(){
+    public void checkMock(){
+
+
+
+    }
+
+    @Test
+    public void checkGetReceiptCorrect() {
 
         String expected = this.createReceipt();
         String result = this.burger.getReceipt();
+
+        System.out.println(expected);
+        System.out.println(result);
 
         assertEquals(expected, result);
     }
 
     //Can parametrize and create new class BurgerMovingIngridients?
     @Test
-    public void checkMoveIngridientCorrect(){
+    public void checkMoveIngridientCorrect() {
 
-        this.moveIngredient(2,3);
+        this.moveIngredient(2, 3);
         String expected = this.createReceipt();
 
-        this.burger.moveIngredient(2,3);
+        this.burger.moveIngredient(2, 3);
         String result = this.burger.getReceipt();
 
         assertEquals(expected, result);
     }
 
     @Test
-    public void checkGetPriceCorrect(){
+    public void checkGetPriceCorrect() {
 
         float expected = this.calculatePrice();
         float result = this.burger.getPrice();
 
-        assertEquals(expected, result,0);
+        assertEquals(expected, result, 0);
 
     }
 }

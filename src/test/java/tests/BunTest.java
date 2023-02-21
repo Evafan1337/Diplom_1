@@ -1,39 +1,30 @@
 package tests;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.Bun;
 
-import java.util.List;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class BunTest {
 
-
-    Bun bun;
-    String name;
-    Double price;
-    boolean result;
+    private Bun bun;
+    private String name;
+    private Double price;
+    private boolean result;
 
     @Test
-    public void getNameCorrect(){
+    public void getNameCorrect() {
         String expected = "test_name";
         Bun bun = new Bun(expected, 1000);
         String result = bun.getName();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void getPriceCorrect(){
+    public void getPriceCorrect() {
         Float expected = 1000.0F;
         Bun bun = new Bun("test_name", expected);
         Float result = bun.getPrice();
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
 }
