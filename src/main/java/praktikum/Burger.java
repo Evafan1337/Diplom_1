@@ -38,7 +38,6 @@ public class Burger {
         for (Ingredient ingredient : ingredients) {
             price += ingredient.getPrice();
         }
-
         return price;
     }
 

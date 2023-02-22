@@ -8,6 +8,7 @@ import praktikum.Burger;
 import praktikum.Ingredient;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class BurgerSmokeTest {
 
@@ -26,7 +27,9 @@ public class BurgerSmokeTest {
 
     @Test
     public void setBunsCorrect() {
-        assert true == true;
+        Bun bun = new Bun("black bun", 100);
+        this.burger.setBuns(bun);
+        assertNotNull(this.burger.bun);
     }
 
     @Test

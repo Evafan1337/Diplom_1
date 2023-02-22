@@ -2,9 +2,11 @@ package tests;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.*;
 
 import java.util.ArrayList;
@@ -12,22 +14,26 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
 
     Burger burger;
-    Database database = new Database();
-
-    List<Bun> buns = database.availableBuns();
 
     @Mock
     Bun bunMock;
 
+    @Mock
+    Ingredient ingredientMockSauce;
+    @Mock
+    Ingredient ingredientMockFill;
 
-    List<Ingredient> ingredients = database.availableIngredients();
+    @Spy
+    Burger burgerSpy;
+
     List<Ingredient> ingredientsUsed = new ArrayList<>();
 
     public float calculatePrice() {
-        float price = buns.get(0).getPrice() * 2;
+        float price = bunMock.getPrice() * 2;
 
         for (Ingredient ingredient : ingredientsUsed) {
             price += ingredient.getPrice();
@@ -37,13 +43,13 @@ public class BurgerTest {
     }
 
     public String createReceipt() {
-        StringBuilder expected = new StringBuilder(String.format("(==== %s ====)%n", buns.get(0).getName()));
+        StringBuilder expected = new StringBuilder(String.format("(==== %s ====)%n", bunMock.getName()));
         for (Ingredient ingredient : ingredientsUsed) {
             expected.append(String.format("= %s %s =%n", ingredient.getType().toString().toLowerCase(),
                     ingredient.getName()));
         }
 
-        expected.append(String.format("(==== %s ====)%n", buns.get(0).getName()));
+        expected.append(String.format("(==== %s ====)%n", bunMock.getName()));
         expected.append(String.format("%nPrice: %f%n", this.calculatePrice()));
         String expectedStr = expected.toString();
 
@@ -61,48 +67,60 @@ public class BurgerTest {
 
         this.burger = new Burger();
 
-        burger.setBuns(buns.get(0));
-        burger.addIngredient(ingredients.get(1));
-        burger.addIngredient(ingredients.get(4));
-        burger.addIngredient(ingredients.get(3));
-        burger.addIngredient(ingredients.get(5));
+//        burger.setBuns(buns.get(0));
+        burger.setBuns(bunMock);
+        burger.addIngredient(ingredientMockSauce);
+        burger.addIngredient(ingredientMockFill);
 
-        this.ingredientsUsed.add(ingredients.get(1));
-        this.ingredientsUsed.add(ingredients.get(4));
-        this.ingredientsUsed.add(ingredients.get(3));
-        this.ingredientsUsed.add(ingredients.get(5));
+
+        Mockito.when(bunMock.getPrice()).thenReturn(100F);
+        Mockito.when(bunMock.getName()).thenReturn("bun_value");
+
+        Mockito.when(ingredientMockSauce.getPrice()).thenReturn(120F);
+        Mockito.when(ingredientMockFill.getPrice()).thenReturn(130F);
+
+        Mockito.when(ingredientMockSauce.getType()).thenReturn(IngredientType.SAUCE);
+        Mockito.when(ingredientMockFill.getType()).thenReturn(IngredientType.FILLING);
+
+        Mockito.when(ingredientMockSauce.getName()).thenReturn("sauce_value");
+        Mockito.when(ingredientMockFill.getName()).thenReturn("fill_value");
+
+        this.ingredientsUsed.add(ingredientMockSauce);
+        this.ingredientsUsed.add(ingredientMockFill);
+
 
     }
 
-    @Test
-    public void checkMock(){
-
-
-
-    }
 
     @Test
     public void checkGetReceiptCorrect() {
 
         String expected = this.createReceipt();
-        String result = this.burger.getReceipt();
 
-        System.out.println(expected);
-        System.out.println(result);
+        Burger burgerTest = new Burger();
+        Burger b1 = Mockito.spy(burgerTest);
+        Bun bunTest = new Bun("bun_value",100F);
+        Ingredient sauceTest = new Ingredient(IngredientType.SAUCE,"sauce_value",100F);
+        Ingredient fillTest = new Ingredient(IngredientType.FILLING, "fill_value", 100F);
+
+        b1.setBuns(bunTest);
+        b1.addIngredient(sauceTest);
+        b1.addIngredient(fillTest);
+
+        Mockito.when(b1.getPrice()).thenReturn(450F);
+
+        String result = b1.getReceipt();
 
         assertEquals(expected, result);
     }
 
     //Can parametrize and create new class BurgerMovingIngridients?
     @Test
-    public void checkMoveIngridientCorrect() {
-
-        this.moveIngredient(2, 3);
+    public void checkMoveIngredientCorrect() {
+        this.moveIngredient(0, 1);
         String expected = this.createReceipt();
-
-        this.burger.moveIngredient(2, 3);
+        this.burger.moveIngredient(0, 1);
         String result = this.burger.getReceipt();
-
         assertEquals(expected, result);
     }
 
