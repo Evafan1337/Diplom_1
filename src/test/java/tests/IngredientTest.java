@@ -11,10 +11,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class IngredientTest {
 
-    IngredientType type;
-    String name;
-    float price;
-    Ingredient ingredient;
+    private IngredientType type;
+    private String name;
+    private float price;
+    private Ingredient ingredient;
 
     public IngredientTest(IngredientType type, String name, float price){
         this.type = type;

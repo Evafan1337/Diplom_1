@@ -13,9 +13,7 @@ import static org.junit.Assert.assertNotNull;
 public class BurgerSmokeTest {
 
     @Mock
-    Ingredient ingredientMock;
-    @Mock
-    Bun bun;
+    private Ingredient ingredientMock;
 
     private Burger burger;
 

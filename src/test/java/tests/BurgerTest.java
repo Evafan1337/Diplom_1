@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.*;
 
@@ -17,20 +16,17 @@ import static org.junit.Assert.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
 
-    Burger burger;
+    private Burger burger;
 
     @Mock
-    Bun bunMock;
+    private Bun bunMock;
 
     @Mock
-    Ingredient ingredientMockSauce;
+    private Ingredient ingredientMockSauce;
     @Mock
-    Ingredient ingredientMockFill;
+    private Ingredient ingredientMockFill;
 
-    @Spy
-    Burger burgerSpy;
-
-    List<Ingredient> ingredientsUsed = new ArrayList<>();
+    private List<Ingredient> ingredientsUsed = new ArrayList<>();
 
     public float calculatePrice() {
         float price = bunMock.getPrice() * 2;
@@ -67,7 +63,6 @@ public class BurgerTest {
 
         this.burger = new Burger();
 
-//        burger.setBuns(buns.get(0));
         burger.setBuns(bunMock);
         burger.addIngredient(ingredientMockSauce);
         burger.addIngredient(ingredientMockFill);
@@ -114,7 +109,6 @@ public class BurgerTest {
         assertEquals(expected, result);
     }
 
-    //Can parametrize and create new class BurgerMovingIngridients?
     @Test
     public void checkMoveIngredientCorrect() {
         this.moveIngredient(0, 1);

@@ -7,11 +7,6 @@ import static org.junit.Assert.assertEquals;
 
 public class BunTest {
 
-    private Bun bun;
-    private String name;
-    private Double price;
-    private boolean result;
-
     @Test
     public void getNameCorrect() {
         String expected = "test_name";
