@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
@@ -63,49 +64,38 @@ public class BurgerTest {
 
         this.burger = new Burger();
 
+
         burger.setBuns(bunMock);
         burger.addIngredient(ingredientMockSauce);
         burger.addIngredient(ingredientMockFill);
 
 
-        Mockito.when(bunMock.getPrice()).thenReturn(100F);
-        Mockito.when(bunMock.getName()).thenReturn("bun_value");
+        when(bunMock.getPrice()).thenReturn(100F);
+        when(bunMock.getName()).thenReturn("bun_value");
 
-        Mockito.when(ingredientMockSauce.getPrice()).thenReturn(120F);
-        Mockito.when(ingredientMockFill.getPrice()).thenReturn(130F);
+        when(ingredientMockSauce.getPrice()).thenReturn(120F);
+        when(ingredientMockFill.getPrice()).thenReturn(130F);
 
-        Mockito.when(ingredientMockSauce.getType()).thenReturn(IngredientType.SAUCE);
-        Mockito.when(ingredientMockFill.getType()).thenReturn(IngredientType.FILLING);
+        when(ingredientMockSauce.getType()).thenReturn(IngredientType.SAUCE);
+        when(ingredientMockFill.getType()).thenReturn(IngredientType.FILLING);
 
-        Mockito.when(ingredientMockSauce.getName()).thenReturn("sauce_value");
-        Mockito.when(ingredientMockFill.getName()).thenReturn("fill_value");
+        when(ingredientMockSauce.getName()).thenReturn("sauce_value");
+        when(ingredientMockFill.getName()).thenReturn("fill_value");
 
         this.ingredientsUsed.add(ingredientMockSauce);
         this.ingredientsUsed.add(ingredientMockFill);
-
 
     }
 
 
     @Test
     public void checkGetReceiptCorrect() {
-
         String expected = this.createReceipt();
 
-        Burger burgerTest = new Burger();
-        Burger b1 = Mockito.spy(burgerTest);
-        Bun bunTest = new Bun("bun_value",100F);
-        Ingredient sauceTest = new Ingredient(IngredientType.SAUCE,"sauce_value",100F);
-        Ingredient fillTest = new Ingredient(IngredientType.FILLING, "fill_value", 100F);
+        Burger burSpy = spy(this.burger);
+        Mockito.doReturn(450F).when(burSpy).getPrice();
 
-        b1.setBuns(bunTest);
-        b1.addIngredient(sauceTest);
-        b1.addIngredient(fillTest);
-
-        Mockito.when(b1.getPrice()).thenReturn(450F);
-
-        String result = b1.getReceipt();
-
+        String result = burSpy.getReceipt();
         assertEquals(expected, result);
     }
 
